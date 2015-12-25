@@ -67,19 +67,248 @@ img {
 </div>
 
 
-<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
-<p>When you click the <strong>Knit</strong> button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
-<pre class="r"><code>summary(cars)</code></pre>
-<pre><code>##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00</code></pre>
-<p>You can also embed plots, for example:</p>
-<p><img src="data:image/png;base64,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" title alt width="672" /></p>
-<p>Note that the <code>echo = FALSE</code> parameter was added to the code chunk to prevent printing of the R code that generated the plot.</p>
+<div id="executive-summary" class="section level2">
+<h2>Executive Summary</h2>
+<p>Two machine learning models were built in order to predict 20 test cases. The random forest model achieved an accuracy (99.77%), while the boosted model achieved an accuracy of (96.78%). Both models predicted the test cases identically therefore the boosted model was selected to be the final model as the model requires much less computation time and would therefore be more efficient in a Production environment.</p>
+<p>The code illustrating the analysis is shown below.</p>
+</div>
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<p>Using devices such as Jawbone Up, Nike FuelBand, and Fitbit it is now possible to collect a large amount of data about personal activity relatively inexpensively. These type of devices are part of the quantified self movement – a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. One thing that people regularly do is quantify how much of a particular activity they do, but they rarely quantify how well they do it. In this project, your goal will be to use data from accelerometers on the belt, forearm, arm, and dumbell of 6 participants. They were asked to perform barbell lifts correctly and incorrectly in 5 different ways</p>
+</div>
+<div id="load-required-packages" class="section level2">
+<h2>Load required Packages</h2>
+<pre class="r"><code>library(caret)</code></pre>
+</div>
+<div id="loading-the-data" class="section level2">
+<h2>Loading the Data</h2>
+<pre class="r"><code>#if data does not exist, then get it from the url's
+if(!file.exists(&quot;./training.csv&quot;)) {
+    #get the training data
+    url &lt;- &quot;https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv&quot;
+    training &lt;- read.csv(url(url))
+
+    #write the training data
+    write.csv(training, file = &quot;./training.csv&quot;)
+
+    #get the test data
+    url &lt;- &quot;https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv&quot;
+    testing &lt;- read.csv(url(url))
+
+    #write the test data
+    write.csv(testing,file=&quot;./testing.csv&quot;)
+}
+
+#read in training and test data from working directory
+training &lt;- read.csv(&quot;./training.csv&quot;,header=TRUE)
+testing &lt;- read.csv(&quot;./testing.csv&quot;,header=TRUE)
+
+dim(training)</code></pre>
+<pre><code>## [1] 19622   161</code></pre>
+<pre class="r"><code>dim(testing)</code></pre>
+<pre><code>## [1]  20 161</code></pre>
+</div>
+<div id="data-preprocessing" class="section level2">
+<h2>Data PreProcessing</h2>
+<p>The following preprocessing steps were carried out to clean up the data and reduce the number of predictor variables.</p>
+<ul>
+<li>All variables which had NA’s were removed</li>
+<li>All variables which had near-zero variances were removed</li>
+<li>The first 7 variables were removed as they were purely descriptive and had no predictive value</li>
+</ul>
+<p>The training data was thus reduced from 161 variables to 53 variables, 1 outcome variable (classe) and 52 predictor variables.</p>
+<pre class="r"><code>#clean up training dataset
+#remove columns with NA#s and near-zero variances
+training.clean &lt;- training[,sapply(training,function(x)!any(is.na(x)))]
+#examine near zero variances
+nzv &lt;- nearZeroVar(training.clean,saveMetrics = TRUE)
+subset(nzv,nzv == TRUE)</code></pre>
+<pre><code>##                          freqRatio percentUnique zeroVar  nzv
+## new_window                47.33005    0.01019264   FALSE TRUE
+## kurtosis_roll_belt      1921.60000    2.02323922   FALSE TRUE
+## kurtosis_picth_belt      600.50000    1.61553358   FALSE TRUE
+## kurtosis_yaw_belt         47.33005    0.01019264   FALSE TRUE
+## skewness_roll_belt      2135.11111    2.01304658   FALSE TRUE
+## skewness_roll_belt.1     600.50000    1.72255631   FALSE TRUE
+## skewness_yaw_belt         47.33005    0.01019264   FALSE TRUE
+## max_yaw_belt             640.53333    0.34654979   FALSE TRUE
+## min_yaw_belt             640.53333    0.34654979   FALSE TRUE
+## amplitude_yaw_belt        50.04167    0.02038528   FALSE TRUE
+## kurtosis_roll_arm        246.35897    1.68178575   FALSE TRUE
+## kurtosis_picth_arm       240.20000    1.67159311   FALSE TRUE
+## kurtosis_yaw_arm        1746.90909    2.01304658   FALSE TRUE
+## skewness_roll_arm        249.55844    1.68688207   FALSE TRUE
+## skewness_pitch_arm       240.20000    1.67159311   FALSE TRUE
+## skewness_yaw_arm        1746.90909    2.01304658   FALSE TRUE
+## kurtosis_roll_dumbbell  3843.20000    2.02833554   FALSE TRUE
+## kurtosis_picth_dumbbell 9608.00000    2.04362450   FALSE TRUE
+## kurtosis_yaw_dumbbell     47.33005    0.01019264   FALSE TRUE
+## skewness_roll_dumbbell  4804.00000    2.04362450   FALSE TRUE
+## skewness_pitch_dumbbell 9608.00000    2.04872082   FALSE TRUE
+## skewness_yaw_dumbbell     47.33005    0.01019264   FALSE TRUE
+## max_yaw_dumbbell         960.80000    0.37203139   FALSE TRUE
+## min_yaw_dumbbell         960.80000    0.37203139   FALSE TRUE
+## amplitude_yaw_dumbbell    47.92020    0.01528896   FALSE TRUE
+## kurtosis_roll_forearm    228.76190    1.64101519   FALSE TRUE
+## kurtosis_picth_forearm   226.07059    1.64611151   FALSE TRUE
+## kurtosis_yaw_forearm      47.33005    0.01019264   FALSE TRUE
+## skewness_roll_forearm    231.51807    1.64611151   FALSE TRUE
+## skewness_pitch_forearm   226.07059    1.62572623   FALSE TRUE
+## skewness_yaw_forearm      47.33005    0.01019264   FALSE TRUE
+## max_yaw_forearm          228.76190    0.22933442   FALSE TRUE
+## min_yaw_forearm          228.76190    0.22933442   FALSE TRUE
+## amplitude_yaw_forearm     59.67702    0.01528896   FALSE TRUE</code></pre>
+<pre class="r"><code>training.clean &lt;- training.clean[,nzv$nzv==FALSE]
+
+#remove columns 1:7 as they have no predictive value
+training.clean &lt;- training.clean[,-c(1:7)]
+dim(training.clean)</code></pre>
+<pre><code>## [1] 19622    53</code></pre>
+</div>
+<div id="create-training-and-validation-datasets" class="section level2">
+<h2>Create Training and Validation Datasets</h2>
+<p>The training set was split up into a train set which contained 60% of the observations, and a validation set containing 40% of the observations. The testing set was only used once at the end to predict the 20 test cases.</p>
+<pre class="r"><code>#split training.clean into train (60%) and validate (40%) data sets
+inTrain &lt;- createDataPartition(y = training.clean$classe,p=0.60,list=FALSE)
+train &lt;- training.clean[inTrain,]
+validate &lt;- training.clean[-inTrain,]
+dim(train)</code></pre>
+<pre><code>## [1] 11776    53</code></pre>
+<pre class="r"><code>dim(validate)</code></pre>
+<pre><code>## [1] 7846   53</code></pre>
+</div>
+<div id="build-models" class="section level2">
+<h2>Build Models</h2>
+<p>Two models were built, a random forest model and a boosted model. Both models were built using 10 ‘repeatedcv’ cross-validations repeated 3 times - a total of 30 cross-validations.</p>
+<p>The out-of-sample errors were estimated using the validation set and calculated using repeated cross-validations for both models.</p>
+<p>The out-of-sample error for the Random Forest and Boosted models are 0.33% and 3.29% respectively.</p>
+<pre class="r"><code>set.seed(12345)</code></pre>
+<div id="random-forest" class="section level3">
+<h3>Random Forest</h3>
+<pre class="r"><code>#build random forest model
+if(!file.exists(&quot;./model.rf.RData&quot;)) {
+    control &lt;- trainControl(method = &quot;repeatedcv&quot;,number = 10,repeats = 3,allowParallel = TRUE)
+    model.rf &lt;- train(classe ~ .,data=train,method=&quot;rf&quot;,prox=TRUE,trControl=control)
+    #save model
+    save(model.rf,file=&quot;./model.rf.RData&quot;)
+} else {
+    load(file=&quot;./model.rf.RData&quot;)
+}
+pred.rf &lt;- predict(model.rf,validate)
+validate$predCorrect &lt;- pred.rf == validate$classe
+
+confusionMatrix(validate$classe,pred.rf)</code></pre>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction    A    B    C    D    E
+##          A 2230    1    1    0    0
+##          B    9 1508    1    0    0
+##          C    0    3 1364    1    0
+##          D    0    0    5 1278    3
+##          E    0    0    0    2 1440
+## 
+## Overall Statistics
+##                                           
+##                Accuracy : 0.9967          
+##                  95% CI : (0.9951, 0.9978)
+##     No Information Rate : 0.2854          
+##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
+##                                           
+##                   Kappa : 0.9958          
+##  Mcnemar's Test P-Value : NA              
+## 
+## Statistics by Class:
+## 
+##                      Class: A Class: B Class: C Class: D Class: E
+## Sensitivity            0.9960   0.9974   0.9949   0.9977   0.9979
+## Specificity            0.9996   0.9984   0.9994   0.9988   0.9997
+## Pos Pred Value         0.9991   0.9934   0.9971   0.9938   0.9986
+## Neg Pred Value         0.9984   0.9994   0.9989   0.9995   0.9995
+## Prevalence             0.2854   0.1927   0.1747   0.1633   0.1839
+## Detection Rate         0.2842   0.1922   0.1738   0.1629   0.1835
+## Detection Prevalence   0.2845   0.1935   0.1744   0.1639   0.1838
+## Balanced Accuracy      0.9978   0.9979   0.9971   0.9982   0.9988</code></pre>
+</div>
+<div id="boosted-model" class="section level3">
+<h3>Boosted Model</h3>
+<pre class="r"><code>#build boosted model
+if(!file.exists(&quot;./model.gbm.RData&quot;)) {
+    control &lt;- trainControl(method = &quot;repeatedcv&quot;,number = 10,repeats = 3,allowParallel = TRUE)
+    model.gbm &lt;- train(classe ~ .,data=train,method=&quot;gbm&quot;,trControl = control,verbose=FALSE)
+    save(model.gbm,file=&quot;./model.gbm.RData&quot;)
+} else {
+    load(file=&quot;./model.gbm.RData&quot;)
+}
+
+pred.gbm &lt;- predict(model.gbm,validate)
+validate$predCorrect &lt;- pred.gbm == validate$classe
+
+confusionMatrix(validate$classe,pred.gbm)</code></pre>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction    A    B    C    D    E
+##          A 2199   21    7    4    1
+##          B   41 1432   43    2    0
+##          C    0   31 1318   15    4
+##          D    0    1   38 1238    9
+##          E    1   13   10   17 1401
+## 
+## Overall Statistics
+##                                          
+##                Accuracy : 0.9671         
+##                  95% CI : (0.9629, 0.971)
+##     No Information Rate : 0.2856         
+##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16      
+##                                          
+##                   Kappa : 0.9584         
+##  Mcnemar's Test P-Value : 6.909e-07      
+## 
+## Statistics by Class:
+## 
+##                      Class: A Class: B Class: C Class: D Class: E
+## Sensitivity            0.9813   0.9559   0.9308   0.9702   0.9901
+## Specificity            0.9941   0.9865   0.9922   0.9927   0.9936
+## Pos Pred Value         0.9852   0.9433   0.9635   0.9627   0.9716
+## Neg Pred Value         0.9925   0.9896   0.9849   0.9942   0.9978
+## Prevalence             0.2856   0.1909   0.1805   0.1626   0.1803
+## Detection Rate         0.2803   0.1825   0.1680   0.1578   0.1786
+## Detection Prevalence   0.2845   0.1935   0.1744   0.1639   0.1838
+## Balanced Accuracy      0.9877   0.9712   0.9615   0.9815   0.9919</code></pre>
+</div>
+</div>
+<div id="test-cases-prediction" class="section level2">
+<h2>Test Cases Prediction</h2>
+<pre class="r"><code>pml_write_files &lt;- function(x){
+    n = length(x)
+    for(i in 1:n){
+        filename = paste0(&quot;problem_id_&quot;,i,&quot;.txt&quot;)
+        write.table(x[i],file=filename,quote=FALSE,row.names=FALSE,col.names=FALSE)
+    }
+}
+
+pred.submission.rf &lt;- predict(model.rf,testing)
+answers.rf &lt;- as.character(pred.submission.rf)
+print(answers.rf)</code></pre>
+<pre><code>##  [1] &quot;B&quot; &quot;A&quot; &quot;B&quot; &quot;A&quot; &quot;A&quot; &quot;E&quot; &quot;D&quot; &quot;B&quot; &quot;A&quot; &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;B&quot; &quot;A&quot; &quot;E&quot; &quot;E&quot; &quot;A&quot;
+## [18] &quot;B&quot; &quot;B&quot; &quot;B&quot;</code></pre>
+<pre class="r"><code>pred.submission.gbm &lt;- predict(model.gbm,testing)
+answers.gbm &lt;- as.character(pred.submission.gbm)
+print(answers.gbm)</code></pre>
+<pre><code>##  [1] &quot;B&quot; &quot;A&quot; &quot;B&quot; &quot;A&quot; &quot;A&quot; &quot;E&quot; &quot;D&quot; &quot;B&quot; &quot;A&quot; &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;B&quot; &quot;A&quot; &quot;E&quot; &quot;E&quot; &quot;A&quot;
+## [18] &quot;B&quot; &quot;B&quot; &quot;B&quot;</code></pre>
+</div>
+<div id="final-model-selection" class="section level2">
+<h2>Final Model Selection</h2>
+<p>The test case prediction results for both models are identical, therefore the boosted model was chosen as the final model, sacrificing a little accuracy for reduced computation build time.</p>
+<pre class="r"><code>#use boosted model as final model as the computation is less
+final.model &lt;- model.gbm
+
+#write submission files
+setwd(&quot;./pml_submission&quot;)
+pml_write_files(answers.gbm)</code></pre>
+</div>
 
 
 </div>

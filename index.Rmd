@@ -5,18 +5,157 @@ date: "December 9, 2015"
 output: html_document
 ---
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+## Executive Summary
+Two machine learning models were built in order to predict 20 test cases. The random forest model achieved an accuracy (99.77%), while the boosted model achieved an accuracy of (96.78%). Both models predicted the test cases identically therefore the boosted model was selected to be the final model as the model requires much less computation time and would therefore be more efficient in a Production environment.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+The code illustrating the analysis is shown below.
 
-```{r}
-summary(cars)
+## Overview
+Using devices such as Jawbone Up, Nike FuelBand, and Fitbit it is now possible to collect a large amount of data about personal activity relatively inexpensively. These type of devices are part of the quantified self movement – a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. One thing that people regularly do is quantify how much of a particular activity they do, but they rarely quantify how well they do it. In this project, your goal will be to use data from accelerometers on the belt, forearm, arm, and dumbell of 6 participants. They were asked to perform barbell lifts correctly and incorrectly in 5 different ways
+
+## Load required Packages
+```{r,LoadPackages,message=FALSE,warning=FALSE}
+library(caret)
 ```
 
-You can also embed plots, for example:
+## Loading the Data
+```{r,LoadData,message=FALSE,warning=FALSE}
+#if data does not exist, then get it from the url's
+if(!file.exists("./training.csv")) {
+    #get the training data
+    url <- "https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv"
+    training <- read.csv(url(url))
 
-```{r, echo=FALSE}
-plot(cars)
+    #write the training data
+    write.csv(training, file = "./training.csv")
+
+    #get the test data
+    url <- "https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv"
+    testing <- read.csv(url(url))
+
+    #write the test data
+    write.csv(testing,file="./testing.csv")
+}
+
+#read in training and test data from working directory
+training <- read.csv("./training.csv",header=TRUE)
+testing <- read.csv("./testing.csv",header=TRUE)
+
+dim(training)
+dim(testing)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+## Data PreProcessing
+The following preprocessing steps were carried out to clean up the data and reduce the number of predictor variables.
+
+* All variables which had NA's were removed
+* All variables which had near-zero variances were removed
+* The first 7 variables were removed as they were purely descriptive and had no predictive value
+
+The training data was thus reduced from 161 variables to 53 variables, 1 outcome variable (classe) and 52 predictor variables.
+
+```{r,PreProcessData,message=FALSE,warning=FALSE}
+#clean up training dataset
+#remove columns with NA#s and near-zero variances
+training.clean <- training[,sapply(training,function(x)!any(is.na(x)))]
+#examine near zero variances
+nzv <- nearZeroVar(training.clean,saveMetrics = TRUE)
+subset(nzv,nzv == TRUE)
+training.clean <- training.clean[,nzv$nzv==FALSE]
+
+#remove columns 1:7 as they have no predictive value
+training.clean <- training.clean[,-c(1:7)]
+dim(training.clean)
+```
+
+## Create Training and Validation Datasets
+The training set was split up into a train set which contained 60% of the observations, and a validation set containing 40% of the observations. The testing set was only used once at the end to predict the 20 test cases.
+
+```{r,CreateTraining,message=FALSE,warning=FALSE}
+#split training.clean into train (60%) and validate (40%) data sets
+inTrain <- createDataPartition(y = training.clean$classe,p=0.60,list=FALSE)
+train <- training.clean[inTrain,]
+validate <- training.clean[-inTrain,]
+dim(train)
+dim(validate)
+```
+
+## Build Models
+Two models were built, a random forest model and a boosted model. Both models were built using 10 'repeatedcv' cross-validations repeated 3 times - a total of 30 cross-validations.
+
+
+The out-of-sample errors were estimated using the validation set and calculated using repeated cross-validations for both models.
+
+
+The out-of-sample error for the Random Forest and Boosted models are 0.33% and 3.29% respectively.
+
+```{r,BuildModels}
+set.seed(12345)
+```
+
+### Random Forest
+```{r,RandomForest,cache=TRUE,message=FALSE,warning=FALSE}
+#build random forest model
+if(!file.exists("./model.rf.RData")) {
+    control <- trainControl(method = "repeatedcv",number = 10,repeats = 3,allowParallel = TRUE)
+    model.rf <- train(classe ~ .,data=train,method="rf",prox=TRUE,trControl=control)
+    #save model
+    save(model.rf,file="./model.rf.RData")
+} else {
+    load(file="./model.rf.RData")
+}
+pred.rf <- predict(model.rf,validate)
+validate$predCorrect <- pred.rf == validate$classe
+
+confusionMatrix(validate$classe,pred.rf)
+
+```
+
+### Boosted Model
+```{r,Boosted,cache=TRUE,message=FALSE,warning=FALSE}
+#build boosted model
+if(!file.exists("./model.gbm.RData")) {
+    control <- trainControl(method = "repeatedcv",number = 10,repeats = 3,allowParallel = TRUE)
+    model.gbm <- train(classe ~ .,data=train,method="gbm",trControl = control,verbose=FALSE)
+    save(model.gbm,file="./model.gbm.RData")
+} else {
+    load(file="./model.gbm.RData")
+}
+
+pred.gbm <- predict(model.gbm,validate)
+validate$predCorrect <- pred.gbm == validate$classe
+
+confusionMatrix(validate$classe,pred.gbm)
+```
+
+## Test Cases Prediction
+```{r,TestCasePrediction,message=FALSE,warning=FALSE}
+pml_write_files <- function(x){
+    n = length(x)
+    for(i in 1:n){
+        filename = paste0("problem_id_",i,".txt")
+        write.table(x[i],file=filename,quote=FALSE,row.names=FALSE,col.names=FALSE)
+    }
+}
+
+pred.submission.rf <- predict(model.rf,testing)
+answers.rf <- as.character(pred.submission.rf)
+print(answers.rf)
+
+pred.submission.gbm <- predict(model.gbm,testing)
+answers.gbm <- as.character(pred.submission.gbm)
+print(answers.gbm)
+
+```
+
+## Final Model Selection
+The test case prediction results for both models are identical, therefore the boosted model was chosen as the final model, sacrificing a little accuracy for reduced computation build time.
+
+```{r,ModelSelection,message=FALSE,warning=FALSE}
+#use boosted model as final model as the computation is less
+final.model <- model.gbm
+
+#write submission files
+setwd("./pml_submission")
+pml_write_files(answers.gbm)
+```
